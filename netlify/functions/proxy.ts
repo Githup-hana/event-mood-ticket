@@ -17,13 +17,20 @@ export default async function handler(event: any, context: any) {
   if (event.httpMethod !== 'GET') {
     return {
       statusCode: 405,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({ error: 'Method not allowed' }),
     }
   }
 
   try {
-    const path = event.queryStringParameters?.path || ''
-    const targetUrl = `${EVENTIM_API}${path ? '/' + path : ''}${event.rawQueryString ? '?' + event.rawQueryString : ''}`
+    // Extract path from the request - Netlify functions receive the full path in path property
+    const path = event.path?.replace('/.netlify/functions/proxy', '') || ''
+    const queryString = event.rawQuery || ''
+    const targetUrl = `${EVENTIM_API}${path}${queryString ? '?' + queryString : ''}`
+
+    console.log('Proxy request to:', targetUrl)
 
     const response = await fetch(targetUrl, {
       headers: { 'Accept': 'application/json' },
@@ -41,6 +48,7 @@ export default async function handler(event: any, context: any) {
       body: JSON.stringify(data),
     }
   } catch (error: any) {
+    console.error('Proxy error:', error)
     return {
       statusCode: 502,
       headers: {
