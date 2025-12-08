@@ -1,6 +1,6 @@
 const EVENTIM_API = 'https://www.eventim-light.com/de/a/5da03c56503ca200015df6cb/api/event'
 
-export async function handler(event: any) {
+exports.handler = async (event, context) => {
   const method = event.httpMethod
 
   // Handle CORS preflight
@@ -26,8 +26,7 @@ export async function handler(event: any) {
   }
 
   try {
-    // The path will be empty for base /api/event and contain /id for /api/event/id
-    const path = event.path?.replace(/^\/\.netlify\/functions\/proxy\/?/, '') || ''
+    const path = (event.path || '').replace(/^\/\.netlify\/functions\/proxy\/?/, '') || ''
     const queryString = event.rawQuery || ''
     
     let targetUrl = EVENTIM_API
@@ -37,6 +36,8 @@ export async function handler(event: any) {
     if (queryString) {
       targetUrl = `${targetUrl}?${queryString}`
     }
+
+    console.log('Fetching:', targetUrl)
 
     const response = await fetch(targetUrl)
     const data = await response.json()
@@ -49,12 +50,12 @@ export async function handler(event: any) {
       },
       body: JSON.stringify(data),
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Proxy error:', error)
     return {
       statusCode: 502,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: error.message || 'Proxy error' }),
     }
   }
 }
