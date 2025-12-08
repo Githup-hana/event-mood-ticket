@@ -1,96 +1,104 @@
 <template>
-  <div class="detail-container bg-yellow-100 min-h-screen py-10 px-4" style="width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;">
-    <div class="detail-inner bg-white shadow-xl border border-black/5 rounded-2xl p-6  ">
+  <div class="detail-container w-screen min-h-screen" style="width: 100vw; min-height: 100vh; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+    <div class="detail-inner bg-yellow-50 shadow-xl border border-black/5 rounded-2xl p-4 w-full max-w-2xl mx-auto my-10">
 
-      <header class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-[#1B263B]">
-          {{ props.event?.title }}
-        </h1>
-        <p class="text-lg text-gray-600">{{ props.event?.subtitle }}</p>
-        <div class="text-gray-500 mt-1">
-          {{ formattedDate }} — {{ formattedTime }}
+   
+      <v-row justify="center" class="mb-10 text-center">
+        <v-col cols="12">
+          <h1 class="text-h3 text-black font-weight-bold">
+            {{ event?.title }}
+          </h1>
+
+          <div class="text-subtitle-1 mt-4 text-grey-darken-1">
+            {{ event?.subtitle }}
+          </div>
+
+          <div class="text-grey-darken-1 mt-1">
+            {{ formattedDate }} — {{ formattedTime }}
+          </div>
+        </v-col>
+      </v-row>
+
+   
+      <v-row class="mb-10">
+        <v-col cols="12">
+      <div class="w-full rounded-lg overflow-hidden max-h-[400px] mx-auto">
+  <img
+    :src="imgSrcComputed"
+    :alt="event?.title"
+    class="w-full h-auto object-contain"
+  />
+</div>
+        </v-col>
+      </v-row>
+
+  
+  
+      <div class="mb-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
+          <div class="info-item flex items-start gap-2 sm:gap-3 pb-4 border-b border-gray-200">
+            <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-map-marker</v-icon>
+            <div class="min-w-0">
+              <div class="text-base sm:text-h6 font-weight-semibold">Veranstaltungsort</div>
+              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.venue?.name }}</div>
+              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.venue?.street }}, {{ event?.venue?.city }}</div>
+            </div>
+          </div>
+
+          <div class="info-item flex items-start gap-2 sm:gap-3 pb-4 border-b border-gray-200">
+             <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-ticket-confirmation</v-icon>
+            <div class="min-w-0">
+              <div class="text-base sm:text-h6 font-weight-semibold">Tickets</div>
+              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.seats ?? "n/a" }} Plätze</div>
+            </div>
+          </div>
+
+          <div class="info-item flex items-start gap-2 sm:gap-3">
+           <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-clock-outline</v-icon>
+            <div class="min-w-0">
+              <div class="text-base sm:text-h6 font-weight-semibold">Doors Open</div>
+              <div class="text-sm sm:text-body-2 text-gray-600">{{ formattedTimeDoorOpen }}</div>
+            </div>
+          </div>
+
+          <div class="info-item flex items-start gap-2 sm:gap-3">
+           
+           
+              <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-lock</v-icon>
+            <div class="min-w-0">
+              <div class="text-base sm:text-h6 font-weight-semibold">Doors Close</div>
+              <div class="text-sm sm:text-body-2 text-gray-600">{{ formattedTimeDoorClose }}</div>
+            </div>
+          </div>
+
         </div>
-      </header>
+      </div>
 
-      <main class="grid grid-cols-1 md:grid-cols-2 gap-10 w-1/2">
+    
+      <v-card variant="outlined" class="pa-4 mb-10" rounded="lg">
+        <Description :event="event" :previewLimit="100" />
+      </v-card>
 
-       
-        <section class="w-full h-30%">
-          <img
-            :src="imgSrcComputed"
-            :alt="props.event?.title"
-            class="rounded-xl h-auto w-full shadow-lg border   object-cover"
-          />
-        </section>
-
-       
-        <section class="flex flex-col gap-6">
-
-      
-          <div class="grid grid-cols-1 gap-4">
-
-            <div class="info-card">
-              <div class="icon">📍</div>
-              <div>
-                <div class="info-title">Veranstaltungsort</div>
-                <div class="info-sub">
-                  {{ props.event?.venue?.name }}  
-                </div>
-                <div class="info-sub">
-                  {{ props.event?.venue?.street }}, {{ props.event?.venue?.city }}
-                </div>
-              </div>
-            </div>
-
-            <div class="info-card">
-              <div class="icon">🕒</div>
-              <div>
-                <div class="info-title">Doors Open</div>
-                <div class="info-sub">{{ formattedTimeDoorOpen }}</div>
-              </div>
-            </div>
-            <div class="w-10 h-2"></div>
-
-            <div class="info-card">
-              <div class="icon">🔒</div>
-              <div>
-                <div class="info-title">Doors Close</div>
-                <div class="info-sub">{{ formattedTimeDoorClose }}</div>
-              </div>
-            </div>
-
-            <div class="info-card">
-              <div class="icon">🎫</div>
-              <div>
-                <div class="info-title">Tickets</div>
-                <div class="info-sub">
-                  {{ props.event?.seats ?? 'n/a' }} Plätze
-                </div>
-              </div>
-            </div>
-
+      <v-row align="center" justify="space-between">
+        <v-col cols="6">
+          <div class="text-h6 font-weight-bold">
+            Preis:
+            <span class="text-h5">{{ event?.maxPrice?.value }} €</span>
           </div>
+        </v-col>
 
-          
-          <div class="description-box p-4 rounded-xl border border-black/5">
-            <Description v-if="props.event" :event="props.event" :previewLimit="0" />
-          </div>
+        <v-col cols="6" class="text-right">
+          <button @click="addToCart" class="btn btn--primary px-6 py-3 text-base font-semibold">
+            Add To Bag
+          </button>
+        </v-col>
+      </v-row>
 
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xl font-bold text-[#1B263B]">
-              Preis:
-              <span class="text-2xl">{{ props.event?.maxPrice?.value ?? '—' }} €</span>
-            </div>
-            <button class="btn btn--primary" @click="addToCart">
-              Add To Bag
-            </button>
-          </div>
-
-        </section>
-      </main>
     </div>
   </div>
 </template>
+
 
 
 <script setup lang="ts">

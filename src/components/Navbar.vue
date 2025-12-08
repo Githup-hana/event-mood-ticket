@@ -5,7 +5,7 @@ import Logo from '@/components/Logo.vue'
 import Korb from '@/components/Korb.vue'  
 import { ref } from 'vue'
 import type { Event } from '@/types/event'
-const showCart = ref(false)
+
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const showCart = ref(false)
       <RouterLink to="/"><Logo class="w-10 h-10 md:w-10 md:h-10 lg:w-16 lg:h-16" /></RouterLink>
       <div style="margin-left: auto; display:flex; align-items:center; gap:0.5rem">
       <div class="flex items-center gap-4">
-        <form action="/search" method="GET">
+        <form action="/events" method="GET">
   <input type="text" name="q" placeholder="Suche..." class="border   border-yellow-500 rounded-md px-2 py-1"/>
   <button type="submit" aria-label="Suche absenden" class="btn ">Suchen</button>
   
