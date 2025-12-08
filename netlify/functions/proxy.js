@@ -46,7 +46,7 @@ exports.handler = async (event, context) => {
     const otherParams = new URLSearchParams()
     for (const [key, value] of Object.entries(queryParams)) {
       if (key !== 'path' && value) {
-        otherParams.append(key, value as string)
+        otherParams.append(key, value )
       }
     }
     if (otherParams.toString()) {
