@@ -1,6 +1,12 @@
 const EVENTIM_API = 'https://www.eventim-light.com/de/a/5da03c56503ca200015df6cb/api/event'
 
 exports.handler = async (event, context) => {
+  console.log('=== PROXY DEBUG ===')
+  console.log('event.path:', event.path)
+  console.log('event.rawQuery:', event.rawQuery)
+  console.log('event.httpMethod:', event.httpMethod)
+  console.log('event.headers:', event.headers)
+  
   const method = event.httpMethod
 
   // Handle CORS preflight
