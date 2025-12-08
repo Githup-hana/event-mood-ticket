@@ -2,10 +2,10 @@
 
 <template>
   <RouterLink :to="{ name: 'eventDetail', params: { id: props.event.id } }" class=" block  no-underline" :aria-label="`Open details for ${props.event.title}`">
-<div class="event-card mx-auto my-4 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow  duration-300 ease-in-out">   
+<div class="event-card mx-auto my-4 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow  duration-300 ease-in-out dark:bg-gray-800">   
     <div class=" w-full"> <img :src="imgSrc" :alt="props.event.title" /></div>
 
-    <div class="w-full event-content-box bg-[#E8C547] font-extrabold text-[#1A1A1A] h-full p-8">
+    <div class="w-full event-content-box bg-[#E8C547] dark:bg-yellow-600 font-extrabold text-[#1A1A1A] dark:text-gray-100 h-full p-8">
       <p v-if="props.event.image?.credit">Bild: {{ props.event.image.credit }}</p>
       <h2 class="titel leading-relaxed">{{ props.event.title }}</h2>
       <p>{{ formattedDate }} - {{ formattedTime }}</p>

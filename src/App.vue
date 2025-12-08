@@ -3,10 +3,10 @@ import Navbar from './components/Navbar.vue'
 
 </script>
 <template>
-	<v-app>
-		<div class="bg-oklch(39.3% 0.095 152.535)">
+	<v-app class="bg-gray-100  min-h-screen transition-colors duration-200">
+		
 			<Navbar />
-		</div>
+		
 	</v-app>
 </template>
 

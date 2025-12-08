@@ -16,6 +16,7 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import App from './App.vue'
 import router from './router'
 import Logo from '@/components/Logo.vue'
+import { useThemeStore } from './stores/theme'
 
 const app = createApp(App)
 
@@ -41,3 +42,7 @@ app.use(router)
 app.component('Logo', Logo)
 
 app.mount('#app')
+
+// Initialize theme after app is mounted
+const themeStore = useThemeStore()
+themeStore.loadTheme()

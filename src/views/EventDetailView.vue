@@ -1,14 +1,5 @@
 <template>
-<!-- 	<div class="event-detail min-h-screen bg-yellow-200 mt-4 w-full px-0">
-		<div v-if="loading" class="text-center">Loading event…</div>
-		<div v-else-if="error" class="text-center text-red-600">Fehler: {{ error }}</div>
-		<div v-else-if="!events[props.id]" class="text-center">Event nicht gefunden.</div>
 
-		
-						
-				
-		
-	</div> -->
 	<AsyncEventContent :event="events[props.id]" />
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-container w-screen min-h-screen" style="width: 100vw; min-height: 100vh; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+  
     <div class="detail-inner bg-yellow-50 shadow-xl border border-black/5 rounded-2xl p-4 w-full max-w-2xl mx-auto my-10">
 
    
@@ -96,7 +96,7 @@
       </v-row>
 
     </div>
-  </div>
+ 
 </template>
 
 
