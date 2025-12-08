@@ -1,11 +1,11 @@
-// Production uses Vercel serverless proxy at /api/proxy
-const PROD_API = '/api/proxy'
+// Netlify serverless proxy
+const PROD_API = '/.netlify/functions/proxy'
 // Fallback direct API (in case proxy fails)
 const FALLBACK_API = 'https://www.eventim-light.com/de/a/5da03c56503ca200015df6cb/api/event'
 
 function getApiBase(): string {
   // Development: use Vite proxy (configured in vite.config.ts)
-  // Production: use Vercel serverless proxy function
+  // Production: use Netlify serverless function
   return import.meta.env.DEV ? '/api/event' : PROD_API
 }
 
