@@ -19,7 +19,12 @@ export async function fetchEvents(): Promise<any[]> {
 }
 
 export async function fetchEventById(id: string): Promise<any> {
-  const url = `${getApiBase()}/${encodeURIComponent(id)}`
+  const base = getApiBase()
+  // Use query parameter for the ID in production (proxy expects ?path=id)
+  const url = import.meta.env.DEV 
+    ? `${base}/${encodeURIComponent(id)}`
+    : `${base}?path=${encodeURIComponent(id)}`
+  
   const res = await fetch(url, { 
     headers: { Accept: 'application/json' }
   })

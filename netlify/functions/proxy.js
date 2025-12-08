@@ -3,9 +3,9 @@ const EVENTIM_API = 'https://www.eventim-light.com/de/a/5da03c56503ca200015df6cb
 exports.handler = async (event, context) => {
   console.log('=== PROXY DEBUG ===')
   console.log('event.path:', event.path)
+  console.log('event.queryStringParameters:', event.queryStringParameters)
   console.log('event.rawQuery:', event.rawQuery)
   console.log('event.httpMethod:', event.httpMethod)
-  console.log('event.headers:', event.headers)
   
   const method = event.httpMethod
 
@@ -32,21 +32,33 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const path = (event.path || '').replace(/^\/\.netlify\/functions\/proxy\/?/, '') || ''
-    const queryString = event.rawQuery || ''
+    // Build URL - proxy just passes through to Eventim API
+    // If there's a query param 'path', append it
+    const queryParams = event.queryStringParameters || {}
+    const pathParam = queryParams.path || ''
     
     let targetUrl = EVENTIM_API
-    if (path) {
-      targetUrl = `${EVENTIM_API}/${path}`
+    if (pathParam) {
+      targetUrl = `${EVENTIM_API}/${pathParam}`
     }
-    if (queryString) {
-      targetUrl = `${targetUrl}?${queryString}`
+    
+    // Include other query params (exclude 'path')
+    const otherParams = new URLSearchParams()
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (key !== 'path' && value) {
+        otherParams.append(key, value as string)
+      }
+    }
+    if (otherParams.toString()) {
+      targetUrl = `${targetUrl}?${otherParams.toString()}`
     }
 
-    console.log('Fetching:', targetUrl)
+    console.log('Fetching from Eventim:', targetUrl)
 
     const response = await fetch(targetUrl)
     const data = await response.json()
+
+    console.log('Success:', data)
 
     return {
       statusCode: 200,
