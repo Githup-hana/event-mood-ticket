@@ -35,7 +35,7 @@ const remove = () => {
 
 <template>
   <div
-    class="price-box w-full flex flex-col sm:flex-row border p-2 border-slate-800 rounded-lg shadow-md"
+    class="price-box w-full flex flex-col sm:flex-row border p-2 border-slate-800 rounded-lg shadow-md overflow-y-auto "
   >
   
     <div class="w-[100%] sm:w-[30%]">
@@ -68,16 +68,18 @@ const remove = () => {
       
 
   
-          <v-row><v-col cols="6">   <div class="text-sm text-slate-300">Ermäßigt</div>
+          <v-row ><v-col class="pr-4" cols="6">   <div class="text-sm text-slate-300">Ermäßigt</div>
             <div class="text-sm font-medium text-indigo-50">
               {{ props.event.minPrice?.value ?? "—" }} €
-            </div></v-col><v-col cols="6"><div class="flex items-center ">
+            </div></v-col>
+            <v-col class="p-8"  cols="6"><div class="flex items-center ">
             <button aria-label="Verringern Ermäßigt" @click="decMin" class="maxmin-button">
               −
             </button>
             <div class="w-10 text-center text-sm font-medium text-indigo-50">{{ item.qtyMin }}</div>
             <button aria-label="Erhöhen Ermäßigt" @click="incMin" class="maxmin-button">+</button>
-          </div></v-col></v-row>
+          </div></v-col>
+        </v-row>
          
          
           
@@ -121,9 +123,12 @@ const remove = () => {
 }
 
 .maxmin-button {
-  width: 26px;
-  height: 26px;
-
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  border: none;
   background-color: #fbbf24;
   color: white;
   display: flex;
@@ -132,9 +137,9 @@ const remove = () => {
   border-radius: 50%;
   font-size: 1rem;
   font-weight: 600;
-
   cursor: pointer;
   transition: 0.15s ease;
+  flex-shrink: 0;
 }
 
 .maxmin-button:hover {
