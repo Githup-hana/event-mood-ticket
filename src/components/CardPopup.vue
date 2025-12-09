@@ -42,7 +42,7 @@ const goToPayment = () => {
       temporary
       scrim
       width="460"
-      content-class="flex flex-col h-full overflow-hidden"
+    
       class="flex flex-col w-full sm:w-[860px] h-screen overflow-hidden"
     >
       <header class="flex items-center justify-between mb-4 flex-shrink-0 p-4">
@@ -54,7 +54,7 @@ const goToPayment = () => {
         Dein Warenkorb ist leer.
       </section>
 
-      <div v-else class="flex flex-col flex-1 min-h-0 overflow-hidden">
+      <div v-else class="flex flex-col flex-1 min-h-0 ">
         <div class="flex-1 overflow-y-auto px-4">
           <ul class="space-y-2 w-full">
             <li
