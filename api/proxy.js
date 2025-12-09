@@ -28,7 +28,9 @@ export default async function handler(req, res) {
     }
     if (otherParams.toString()) targetUrl = `${targetUrl}?${otherParams.toString()}`
 
+    const start = Date.now()
     const response = await fetch(targetUrl)
+    console.log('Fetch Dauer (ms):', Date.now() - start)   // <-- Log direkt nach fetch
 
     // Prüfen, ob die API OK ist
     if (!response.ok) {
@@ -40,6 +42,7 @@ export default async function handler(req, res) {
     return res.status(200).json(data)
   } catch (error) {
     res.setHeader('Access-Control-Allow-Origin', '*')
+    console.error('Proxy Fehler:', error)   // <-- auch hier loggen
     return res.status(502).json({ error: error.message || 'Proxy error' })
   }
 }
