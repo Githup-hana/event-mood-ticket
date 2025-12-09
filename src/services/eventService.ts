@@ -1,4 +1,4 @@
-// Netlify serverless proxy
+
 const PROD_API = '/api/proxy'
 
 function getApiBase(): string {
