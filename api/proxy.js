@@ -4,6 +4,7 @@ const EVENTIM_API = 'https://www.eventim-light.com/de/a/5da03c56503ca200015df6cb
 export default async function handler(req, res) {
   const method = req.method
 
+  // CORS Preflight
   if (method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
@@ -28,8 +29,13 @@ export default async function handler(req, res) {
     if (otherParams.toString()) targetUrl = `${targetUrl}?${otherParams.toString()}`
 
     const response = await fetch(targetUrl)
-    const data = await response.json()
 
+    // Prüfen, ob die API OK ist
+    if (!response.ok) {
+      return res.status(response.status).json({ error: `Eventim API error ${response.status}` })
+    }
+
+    const data = await response.json()
     res.setHeader('Access-Control-Allow-Origin', '*')
     return res.status(200).json(data)
   } catch (error) {
