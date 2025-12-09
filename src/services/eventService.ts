@@ -1,5 +1,5 @@
 // Netlify serverless proxy
-const PROD_API = '/.netlify/functions/proxy'
+const PROD_API = '/api/proxy'
 
 function getApiBase(): string {
   // Development: use Vite proxy (configured in vite.config.ts)
