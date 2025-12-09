@@ -38,9 +38,9 @@ const remove = () => {
     class="price-box w-full flex flex-col sm:flex-row border p-2 border-slate-800 rounded-lg shadow-md"
   >
   
-    <div class="w-[30%]">
+    <div class="w-[100%] sm:w-[30%]">
       <div class="flex-shrink-0 w-full  mb-3 sm:mb-0 sm:mr-4">
-        <img :src="imgSrc" alt="ticket" class="w-full h-40 sm:h-28 object-cover rounded" />
+        <img :src="imgSrc" alt="ticket" class="w-full  sm:h-28  rounded" />
       </div>
       <div class=" flex-shrink-0   d-flex flex-wrap font-medium text-indigo-100 mb-2 break-words">{{ props.event.title }}</div>
     </div>
@@ -107,6 +107,7 @@ const remove = () => {
   border-radius: 0.5rem;
   object-fit: cover;
   margin-bottom: 0.5rem;
+  object-fit: cover;
 }
 
 .maxmin-container {
