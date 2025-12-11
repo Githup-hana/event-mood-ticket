@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
 import Logo from '@/components/Logo.vue'
 import Korb from '@/components/Korb.vue'  
-import { ref } from 'vue'
-import type { Event } from '@/types/event'
+import { ref, defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
+
+// Lazy load SearchBar component
+const SearchBar = defineAsyncComponent(() => import('@/components/SearchBar.vue'))
 
 const themeStore = useThemeStore()
 const mobileMenuOpen = ref(false)
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
+}
+
+const handleSearchSubmit = () => {
+  mobileMenuOpen.value = false
 }
 
 </script>
@@ -27,15 +32,12 @@ const toggleMobileMenu = () => {
 
       <!-- Desktop Navigation -->
       <div class="desktop-nav">
-        <form action="/events" method="GET" class="search-form">
-          <input 
-            type="text" 
-            name="q" 
-            placeholder="Suche..." 
-            class="search-input"
-          />
-          <button type="submit" aria-label="Suche absenden" class="btn">Suchen</button>
-        </form>
+        <Suspense>
+          <SearchBar @search-submitted="handleSearchSubmit" />
+          <template #fallback>
+            <div class="search-placeholder"></div>
+          </template>
+        </Suspense>
 
         <button 
           @click="themeStore.toggleTheme" 
@@ -72,15 +74,12 @@ const toggleMobileMenu = () => {
     <!-- Mobile Menu -->
     <Transition name="mobile-menu">
       <div v-show="mobileMenuOpen" class="mobile-menu">
-        <form action="/events" method="GET" class="mobile-search-form">
-          <input 
-            type="text" 
-            name="q" 
-            placeholder="Suche..." 
-            class="search-input mobile"
-          />
-          <button type="submit" aria-label="Suche absenden" class="btn">Suchen</button>
-        </form>
+        <Suspense>
+          <SearchBar @search-submitted="handleSearchSubmit" />
+          <template #fallback>
+            <div class="search-placeholder"></div>
+          </template>
+        </Suspense>
 
         <div class="mobile-actions">
           <button 
@@ -168,51 +167,21 @@ const toggleMobileMenu = () => {
   }
 }
 
-.search-form {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.search-input {
-  border: 1px solid #fbbf24;
+.search-placeholder {
+  height: 40px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  background-color: white;
-  color: #1f2937;
-  outline: none;
-  transition: all 0.2s;
-  min-width: 150px;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-.search-input:focus {
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
-}
-
-:deep(.dark) .search-input {
-  background-color: #1f2937;
-  color: white;
-  border-color: #fbbf24;
-}
-
-.search-input.mobile {
-  width: 100%;
-}
-
-.btn {
-  background-color: #fbbf24;
-  color: #1f2937;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-}
-
-.btn:hover {
-  background-color: #f59e0b;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .theme-toggle {
@@ -274,13 +243,6 @@ const toggleMobileMenu = () => {
   }
 }
 
-.mobile-search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-}
-
 .mobile-actions {
   display: flex;
   flex-direction: column;
@@ -319,8 +281,8 @@ const toggleMobileMenu = () => {
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
-  .search-input {
-    min-width: 200px;
+  .search-placeholder {
+    width: 350px;
   }
 }
 
@@ -329,8 +291,8 @@ const toggleMobileMenu = () => {
     padding: 0 2rem;
   }
   
-  .search-input {
-    min-width: 250px;
+  .search-placeholder {
+    width: 400px;
   }
 }
 </style>

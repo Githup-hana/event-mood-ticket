@@ -1,10 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
-
-import EventDetailView from '@/views/EventDetailView.vue'
-import EventsView from '@/views/EventsView.vue'
-import ShoppingBag from '@/views/ShoppingBag.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,27 +6,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('@/views/HomeView.vue'),
     },
     {
       path: '/cart',
       name: 'cart',
-      component: ShoppingBag,
+      component: () => import('@/views/ShoppingBag.vue'),
     },
     {
       path: '/about',
       name: 'about',
-      component: AboutView,
+      component: () => import('@/views/AboutView.vue'),
     },
     {
       path: '/events',
       name: 'events',
-      component: EventsView,
+      component: () => import('@/views/EventsView.vue'),
     },
     {
       path: '/events/:id',
       name: 'eventDetail',
-      component: EventDetailView,
+      component: () => import('@/views/EventDetailView.vue'),
       props: true,
     },
     {
