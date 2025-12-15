@@ -6,7 +6,7 @@
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
       </svg>
-      <span class="sr-only">Loading events…</span>
+      <span class="sr-only">Events werden geladen…</span>
     </div>
     <div v-else-if="error" class="error dark:text-red-400">{{ error }}</div>
     <div v-else-if="events.length === 0 && searchStore.locationQuery" class="text-center py-12">
@@ -28,7 +28,7 @@
     <ul
       v-else
       role="list"
-      aria-label="Events list"
+      aria-label="Event-Liste"
       class="list-none my-8 mx-auto grid gap-4 box-border justify-items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
     >
       <li v-for="event in events" :key="event.id">

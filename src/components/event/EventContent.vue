@@ -90,7 +90,7 @@
 
         <v-col cols="6" class="text-right">
           <button @click="addToCart" class="btn btn--primary px-6 py-3 text-base font-semibold">
-            Add To Bag
+            In den Warenkorb
           </button>
         </v-col>
       </v-row>

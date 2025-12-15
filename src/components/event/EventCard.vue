@@ -1,7 +1,7 @@
 
 
 <template>
-  <RouterLink :to="{ name: 'eventDetail', params: { id: props.event.id } }" class=" block  no-underline" :aria-label="`Open details for ${props.event.title}`">
+  <RouterLink :to="{ name: 'eventDetail', params: { id: props.event.id } }" class=" block  no-underline" :aria-label="`Details öffnen für ${props.event.title}`">
 <div class="event-card mx-auto my-4 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow  duration-300 ease-in-out dark:bg-gray-800">   
     <div class=" w-full"> <img :src="imgSrc" :alt="props.event.title" /></div>
 
@@ -134,9 +134,9 @@ const formattedTime = computed(() =>
 )
 
 const buttonText = computed(() => {
-  if (props.event.sold_out) return 'Nicht verfügbar'
+  if (props.event.sold_out) return 'Ausverkauft'
   const p = props.event.minPrice
-  if (!p || p.value == null) return 'Details'
-  return `From ${typeof p.value === 'number' ? p.value.toFixed(2) : p.value} ${p.currency ?? ''}`
+  if (!p || p.value == null) return 'Mehr erfahren'
+  return `Ab ${typeof p.value === 'number' ? p.value.toFixed(2) : p.value} €`
 })
 </script>

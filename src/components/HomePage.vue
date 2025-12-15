@@ -52,10 +52,10 @@ const goEvents = () => router.push({ name: 'events' })
 
      
       <p class="text-xl font-normal text-white/90">
-          Welcome to EventMood Tickets
+          Willkommen bei EventMood Tickets
       </p>
       <p class="text-xl font-normal text-white/90">
-          Book. Experience. Remember.
+          Buchen • Erleben • Erinnern
       </p>
 
      
@@ -63,7 +63,7 @@ const goEvents = () => router.push({ name: 'events' })
         @click="goEvents"
         class="btn  btn--primary mt-5"
         type="button"
-        aria-label="evententdecken "
+        aria-label="Events entdecken"
       >
         Events entdecken →
       </button>
