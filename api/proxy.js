@@ -33,7 +33,9 @@ export default async function handler(req, res) {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://www.eventim-light.com/',
+        'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8'
       }
     })
     console.log('Fetch Dauer (ms):', Date.now() - start)   // <-- Log direkt nach fetch
