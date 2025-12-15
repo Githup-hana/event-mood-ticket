@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { useI18n } from 'vue-i18n'
 import type { Event } from "@/types/event";
 import { useCartStore } from "@/stores/cart";
 
+const { t } = useI18n()
 const props = defineProps<{ event: Event }>();
 const cart = useCartStore();
 const imgSrc = computed(() =>
@@ -48,18 +50,18 @@ const remove = () => {
     
     <div class="flex-1 min-w-0 space-y-2 ml-4">
     
-        <h2 class="text-sm font-semibold text-indigo-100 mb-3">Freie Platzwahl</h2>
+        <h2 class="text-sm font-semibold text-indigo-100 mb-3">{{ t('event.seating') }}</h2>
 
-          <v-row ><v-col  cols="6"> <div class="text-sm text-slate-300">Normalpreis</div>
+          <v-row ><v-col  cols="6"> <div class="text-sm text-slate-300">{{ t('event.standardPrice') }}</div>
             <div class="text-sm font-small text-indigo-50">
               {{ props.event.maxPrice?.value ?? "—" }} €
             </div>
             </v-col> <v-col cols="6"> <div class="flex items-center ">
-            <button aria-label="Verringern Normalpreis" @click="decMax" class="maxmin-button">
+            <button :aria-label="`${t('event.decrease')} ${t('event.standardPrice')}`" @click="decMax" class="maxmin-button">
               −
             </button>
             <div class="w-10 text-center text-sm font-medium text-indigo-50">{{ item.qtyMax }}</div>
-            <button aria-label="Erhöhen Normalpreis" @click="incMax" class="maxmin-button">
+            <button :aria-label="`${t('event.increase')} ${t('event.standardPrice')}`" @click="incMax" class="maxmin-button">
               +
             </button>
           </div></v-col></v-row>
@@ -68,16 +70,16 @@ const remove = () => {
       
 
   
-          <v-row ><v-col class="pr-4" cols="6">   <div class="text-sm text-slate-300">Ermäßigt</div>
+          <v-row ><v-col class="pr-4" cols="6">   <div class="text-sm text-slate-300">{{ t('event.reduced') }}</div>
             <div class="text-sm font-medium text-indigo-50">
               {{ props.event.minPrice?.value ?? "—" }} €
             </div></v-col>
             <v-col class="p-8"  cols="6"><div class="flex items-center ">
-            <button aria-label="Verringern Ermäßigt" @click="decMin" class="maxmin-button">
+            <button :aria-label="`${t('event.decrease')} ${t('event.reduced')}`" @click="decMin" class="maxmin-button">
               −
             </button>
             <div class="w-10 text-center text-sm font-medium text-indigo-50">{{ item.qtyMin }}</div>
-            <button aria-label="Erhöhen Ermäßigt" @click="incMin" class="maxmin-button">+</button>
+            <button :aria-label="`${t('event.increase')} ${t('event.reduced')}`" @click="incMin" class="maxmin-button">+</button>
           </div></v-col>
         </v-row>
          
@@ -89,14 +91,14 @@ const remove = () => {
     <div
       class="w-full sm:w-24 flex-shrink-0 flex flex-col items-end sm:items-end justify-between gap-2 pl-0 sm:pl-4 mt-3 sm:mt-0"
     >
-      <div class="text-sm text-slate-300">{{ totalTickets }} Tickets</div>
+      <div class="text-sm text-slate-300">{{ totalTickets }} {{ t('cart.tickets') }}</div>
     <!--   <div class="text-lg font-medium text-indigo-50">{{ totalPrice.toFixed(2) }} €</div> -->
       <button
         v-if="totalTickets > 0"
         @click="remove"
         class="text-sm text-red-400 hover:text-red-300"
       >
-        Entfernen
+        {{ t('cart.remove') }}
       </button>
     </div>
   </div>

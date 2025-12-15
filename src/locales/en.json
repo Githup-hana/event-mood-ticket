@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "about": "About",
+    "search": "Search"
+  },
+  "home": {
+    "title": "Welcome to Eventim",
+    "subtitle": "Discover the best events",
+    "featured": "Featured Events"
+  },
+  "events": {
+    "title": "All Events",
+    "noEvents": "No events found",
+    "noEventsFor": "No events found for \"{location}\"",
+    "showAll": "Show all events",
+    "date": "Date",
+    "price": "Price",
+    "location": "Location",
+    "loading": "Loading events…"
+  },
+  "event": {
+    "description": "Description",
+    "price": "Price",
+    "priceFrom": "Price from",
+    "image": "Image",
+    "from": "From",
+    "soldOut": "Sold Out",
+    "learnMore": "Learn More",
+    "buyTickets": "Buy Tickets",
+    "addToCart": "Add to Cart",
+    "date": "Date",
+    "time": "Time",
+    "location": "Venue",
+    "capacity": "Available Seats",
+    "doorOpen": "Doors Open",
+    "doorClose": "Doors Close",
+    "seating": "Free Seating",
+    "standardPrice": "Standard Price",
+    "reduced": "Reduced",
+    "increase": "Increase",
+    "decrease": "Decrease"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total Price",
+    "totalCount": "Total Quantity",
+    "checkout": "Checkout",
+    "continue": "Continue Shopping",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "tickets": "Tickets"
+  },
+  "payment": {
+    "title": "Payment Method",
+    "creditCard": "Credit Card",
+    "paypal": "PayPal",
+    "bankTransfer": "Bank Transfer",
+    "pay": "Pay",
+    "cancel": "Cancel"
+  },
+ 
+  "search": {
+    "placeholder": "Enter city or location...",
+    "button": "Search"
+  },
+  "common": {
+    "language": "Language",
+    "german": "Deutsch",
+    "english": "English",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "back": "Back",
+    "more": "More",
+    "less": "Less"
+  }
+}

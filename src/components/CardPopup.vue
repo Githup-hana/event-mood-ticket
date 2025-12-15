@@ -4,6 +4,9 @@ import { useCartStore } from "@/stores/cart";
 import { storeToRefs } from "pinia";
 import EventPriceChooser from "./event/EventPriceChooser.vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits(["update:modelValue"]);
 const dialog = computed({
@@ -46,12 +49,12 @@ const goToPayment = () => {
       class="flex flex-col w-full sm:w-[860px] h-screen !overflow-hidden"
     >
       <header class="flex items-center justify-between mb-4 flex-shrink-0 p-4">
-        <h1 class="text-xl font-bold text-indigo-600 ml-4">Warenkorb</h1>
+        <h1 class="text-xl font-bold text-indigo-600 ml-4">{{ t('cart.title') }}</h1>
         <button @click="dialog = false" class="text-black hover:text-white">✕</button>
       </header>
 
       <section v-if="(tickets || []).length === 0" class="text-black font-bold p-4 flex-shrink-0">
-        Dein Warenkorb ist leer.
+        {{ t('cart.empty') }}
       </section>
 
       <div v-else class="flex flex-col h-full">
@@ -70,10 +73,10 @@ const goToPayment = () => {
         <footer class="sticky bottom-0 border-t border-slate-800 pt-4 bg-white shadow-lg">
           <div class="flex items-center justify-between p-4">
             <div class="text-black">
-              Gesamtanzahl: <span class="font-medium text-indigo-">{{ cart.totalCount }}</span>
+              {{ t('cart.totalCount') }}: <span class="font-medium text-indigo-">{{ cart.totalCount }}</span>
             </div>
             <div class="text-black">
-              Gesamtpreis:
+              {{ t('cart.total') }}:
               <span class="font-medium text-indigo-">{{ cart.totalPrice.toFixed(2) }} €</span>
             </div>
           </div>
@@ -83,13 +86,13 @@ const goToPayment = () => {
               @click="continueShopping"
               class="bg-slate-700 text-slate-200 px-4 py-2 rounded hover:bg-slate-600"
             >
-              Weiter einkaufen
+              {{ t('cart.continue') }}
             </button>
             <button
               @click="goToPayment"
               class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500"
             >
-              Zur Kasse
+              {{ t('cart.checkout') }}
             </button>
           </div>
         </footer>

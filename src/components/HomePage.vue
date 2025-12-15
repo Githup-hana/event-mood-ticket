@@ -1,12 +1,10 @@
 <script setup>
-
-
-
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import Logo from '@/components/Logo.vue'
 
-
-
+const { t } = useI18n()
+const router = useRouter()
 
 const images = [
   'https://www.eventim-light.com/de/api/image/66436c38ac2ac1627518697a/shop_cover_v3/webp',
@@ -14,9 +12,8 @@ const images = [
   'https://www.eventim-light.com/de/api/image/64fee7e9dbc2604784cbab20/shop_cover_v3/webp',
   'https://www.eventim-light.com/de/api/image/67ea4b490bf96c16ec22d6f0/shop_cover_v3/webp',
   'https://www.eventim-light.com/de/api/image/67dd5c676c100a12f992aa4c/shop_cover_v3/webp'
-];
- 
-const router = useRouter()
+]
+
 const goEvents = () => router.push({ name: 'events' })
 </script>
 
@@ -52,10 +49,10 @@ const goEvents = () => router.push({ name: 'events' })
 
      
       <p class="text-xl font-normal text-white/90">
-          Willkommen bei EventMood Tickets
+          {{ t('home.title') }}
       </p>
       <p class="text-xl font-normal text-white/90">
-          Buchen • Erleben • Erinnern
+          {{ t('home.subtitle') }}
       </p>
 
      
@@ -65,7 +62,7 @@ const goEvents = () => router.push({ name: 'events' })
         type="button"
         aria-label="Events entdecken"
       >
-        Events entdecken →
+        {{ t('nav.events') }} →
       </button>
 
     </div>

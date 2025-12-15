@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "events": "Veranstaltungen",
+    "about": "Über uns",
+    "search": "Suchen"
+  },
+  "home": {
+    "title": "Willkommen zu Eventim",
+    "subtitle": "Entdecke die besten Veranstaltungen",
+    "featured": "Empfohlene Events"
+  },
+  "events": {
+    "title": "Alle Veranstaltungen",
+    "noEvents": "Keine Events gefunden",
+    "noEventsFor": "Keine Events für \"{location}\" gefunden",
+    "showAll": "Alle Events anzeigen",
+    "date": "Datum",
+    "price": "Preis",
+    "location": "Ort",
+    "loading": "Events werden geladen…"
+  },
+  "event": {
+    "description": "Beschreibung",
+    "price": "Preis",
+    "priceFrom": "Preis ab",
+    "image": "Bild",
+    "from": "Ab",
+    "soldOut": "Ausverkauft",
+    "learnMore": "Mehr erfahren",
+    "buyTickets": "Tickets kaufen",
+    "addToCart": "In den Warenkorb",
+    "date": "Datum",
+    "time": "Zeit",
+    "location": "Veranstaltungsort",
+    "capacity": "Verfügbare Plätze",
+    "doorOpen": "Einlass",
+    "doorClose": "Ende",
+    "seating": "Freie Platzwahl",
+    "standardPrice": "Normalpreis",
+    "reduced": "Ermäßigt",
+    "increase": "Erhöhen",
+    "decrease": "Verringern"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Dein Warenkorb ist leer",
+    "total": "Gesamtpreis",
+    "totalCount": "Gesamtanzahl",
+    "checkout": "Zur Kasse",
+    "continue": "Weiter einkaufen",
+    "remove": "Entfernen",
+    "quantity": "Menge",
+    "tickets": "Tickets"
+  },
+  "payment": {
+    "title": "Zahlungsweise",
+    "creditCard": "Kreditkarte",
+    "paypal": "PayPal",
+    "bankTransfer": "Banküberweisung",
+    "pay": "Bezahlen",
+    "cancel": "Abbrechen"
+  },
+  "about": {
+    "title": "Über uns",
+    "description": "Eventim Mini ist deine Plattform für Tickets zu den besten Events"
+  },
+  "search": {
+    "placeholder": "Stadt oder Ort eingeben...",
+    "button": "Suchen"
+  },
+  "common": {
+    "language": "Sprache",
+    "german": "Deutsch",
+    "english": "English",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolgreich",
+    "back": "Zurück",
+    "more": "Mehr",
+    "less": "Weniger"
+  }
+}

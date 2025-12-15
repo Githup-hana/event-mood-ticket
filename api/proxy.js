@@ -38,9 +38,9 @@ export default async function handler(req, res) {
         'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8'
       }
     })
-    console.log('Fetch Dauer (ms):', Date.now() - start)   // <-- Log direkt nach fetch
+    console.log('Fetch Dauer (ms):', Date.now() - start)   
 
-    // Prüfen, ob die API OK ist
+   
     if (!response.ok) {
       const errText = await response.text().catch(() => '')
       console.log(`API returned status ${response.status} for URL: ${targetUrl}`)
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     return res.status(200).json(data)
   } catch (error) {
     res.setHeader('Access-Control-Allow-Origin', '*')
-    console.error('Proxy Fehler:', error)   // <-- auch hier loggen
+    console.error('Proxy Fehler:', error)   
     return res.status(502).json({ error: error.message || 'Proxy error' })
   }
 }

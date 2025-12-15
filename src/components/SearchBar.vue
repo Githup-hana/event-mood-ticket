@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useSearchStore } from '@/stores/search'
 
+const { t } = useI18n()
 const searchQuery = ref('')
 const searchStore = useSearchStore()
 
@@ -20,16 +22,16 @@ const emit = defineEmits(['search-submitted'])
     <input 
       v-model="searchQuery"
       type="text" 
-      placeholder="Stadt oder Ort eingeben..." 
+      :placeholder="t('search.placeholder')" 
       class="search-input"
       @keyup.enter="handleSearch"
     />
-    <button type="submit" aria-label="Nach Events suchen" class="btn">
+    <button type="submit" :aria-label="t('search.button')" class="btn">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 inline-block">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
       </svg>
-      <span class="ml-1">Suchen</span>
+      <span class="ml-1">{{ t('search.button') }}</span>
     </button>
   </form>
 </template>

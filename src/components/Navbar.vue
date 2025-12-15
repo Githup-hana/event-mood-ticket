@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Logo from '@/components/Logo.vue'
 import Korb from '@/components/Korb.vue'  
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import { ref, defineAsyncComponent } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 
@@ -52,6 +53,8 @@ const handleSearchSubmit = () => {
           </svg>
         </button>
 
+        <LanguageSwitcher />
+
         <Korb />
       </div>
 
@@ -95,6 +98,8 @@ const handleSearchSubmit = () => {
             </svg>
             <span>{{ themeStore.isDark ? 'Heller Modus' : 'Dunkler Modus' }}</span>
           </button>
+
+          <LanguageSwitcher />
 
           <div @click="mobileMenuOpen = false">
             <Korb />
@@ -186,19 +191,20 @@ const handleSearchSubmit = () => {
 
 .theme-toggle {
   padding: 0.5rem;
-  border-radius: 9999px;
+  border-radius: 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: white;
-  transition: background-color 0.2s;
+  color: #E8C547;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(232, 197, 71, 0.1);
+  color: #fbbf24;
 }
 
 /* Mobile Menu Button */
@@ -211,13 +217,14 @@ const handleSearchSubmit = () => {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: white;
-  border-radius: 0.375rem;
-  transition: background-color 0.2s;
+  color: #E8C547;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
 }
 
 .mobile-menu-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(232, 197, 71, 0.1);
+  color: #fbbf24;
 }
 
 @media (min-width: 768px) {

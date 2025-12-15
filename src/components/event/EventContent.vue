@@ -40,7 +40,7 @@
           <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors border border-blue-100">
             <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-map-marker</v-icon>
             <div class="min-w-0">
-              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Veranstaltungsort</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{{ t('event.location') }}</div>
               <div class="text-base font-bold text-gray-900 mt-1">{{ event?.venue?.name }}</div>
               <div class="text-sm text-gray-600 mt-1">{{ event?.venue?.street }}, {{ event?.venue?.city }}</div>
             </div>
@@ -49,7 +49,7 @@
           <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors border border-amber-100">
              <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-ticket-confirmation</v-icon>
             <div class="min-w-0">
-              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Verfügbare Plätze</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{{ t('event.capacity') }}</div>
               <div class="text-base font-bold text-gray-900 mt-1">{{ event?.seats ?? "n/a" }}</div>
             </div>
           </div>
@@ -57,7 +57,7 @@
           <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-green-50 hover:bg-green-100 transition-colors border border-green-100">
            <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-door-open</v-icon>
             <div class="min-w-0">
-              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Einlass</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{{ t('event.doorOpen') }}</div>
               <div class="text-base font-bold text-gray-900 mt-1">{{ formattedTimeDoorOpen }}</div>
             </div>
           </div>
@@ -65,7 +65,7 @@
           <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-red-50 hover:bg-red-100 transition-colors border border-red-100">
            <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-door-closed</v-icon>
             <div class="min-w-0">
-              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Ende</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{{ t('event.doorClose') }}</div>
               <div class="text-base font-bold text-gray-900 mt-1">{{ formattedTimeDoorClose }}</div>
             </div>
           </div>
@@ -80,13 +80,13 @@
 
       <v-row align="center" justify="space-between" class="pt-6 border-t border-gray-200">
         <v-col cols="12" sm="6">
-          <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Preis ab</div>
+          <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">{{ t('event.priceFrom') }}</div>
           <div class="text-3xl font-bold text-gray-900">{{ event?.minPrice?.value ?? event?.maxPrice?.value }} <span class="text-lg">€</span></div>
         </v-col>
 
         <v-col cols="12" sm="6" class="text-right">
           <button @click="addToCart" class="btn btn--primary px-8 py-4 text-base font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-            In den Warenkorb 🛒
+            {{ t('event.addToCart') }} 🛒
           </button>
         </v-col>
       </v-row>
@@ -99,9 +99,12 @@
 
 <script setup lang="ts">
 import { computed, ref, toRefs } from "vue";
+import { useI18n } from 'vue-i18n'
 import Description from "./EventDescription.vue";
 import type { EventContentProps } from "@/types/event";
 import { useCartStore } from "@/stores/cart";
+
+const { t } = useI18n()
 const cart = useCartStore();
 
 const props = defineProps<EventContentProps>();

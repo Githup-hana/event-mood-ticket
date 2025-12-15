@@ -9,15 +9,17 @@
       :aria-expanded="expanded"
       aria-controls="event-description"
     >
-      {{ expanded ? 'Weniger' : 'Mehr' }}
+      {{ expanded ? t('common.less') : t('common.more') }}
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Event } from '@/types/event'
 
+const { t } = useI18n()
 const props = defineProps<{ event: Event | null; previewLimit?: number }>()
 
 const PREVIEW_LIMIT = props.previewLimit ?? 100
