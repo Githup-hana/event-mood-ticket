@@ -1,6 +1,6 @@
 <template>
   
-    <div class="detail-inner bg-yellow-50 shadow-xl border border-black/5 rounded-2xl p-4 w-full max-w-2xl mx-auto my-10">
+    <div class="detail-inner bg-yellow-50 shadow-2xl border border-gray-200 rounded-3xl p-6 sm:p-8 w-full max-w-3xl mx-auto my-10">
 
    
       <v-row justify="center" class="mb-10 text-center">
@@ -22,7 +22,7 @@
    
       <v-row class="mb-10">
         <v-col cols="12">
-      <div class="w-full rounded-lg overflow-hidden max-h-[400px] mx-auto">
+       <div class="w-full rounded-lg overflow-hidden max-h-[400px] mx-auto">
   <img
     :src="imgSrcComputed"
     :alt="event?.title"
@@ -35,40 +35,38 @@
   
   
       <div class="mb-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-          <div class="info-item flex items-start gap-2 sm:gap-3 pb-4 border-b border-gray-200">
-            <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-map-marker</v-icon>
+          <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors border border-blue-100">
+            <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-map-marker</v-icon>
             <div class="min-w-0">
-              <div class="text-base sm:text-h6 font-weight-semibold">Veranstaltungsort</div>
-              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.venue?.name }}</div>
-              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.venue?.street }}, {{ event?.venue?.city }}</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Veranstaltungsort</div>
+              <div class="text-base font-bold text-gray-900 mt-1">{{ event?.venue?.name }}</div>
+              <div class="text-sm text-gray-600 mt-1">{{ event?.venue?.street }}, {{ event?.venue?.city }}</div>
             </div>
           </div>
 
-          <div class="info-item flex items-start gap-2 sm:gap-3 pb-4 border-b border-gray-200">
-             <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-ticket-confirmation</v-icon>
+          <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors border border-amber-100">
+             <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-ticket-confirmation</v-icon>
             <div class="min-w-0">
-              <div class="text-base sm:text-h6 font-weight-semibold">Tickets</div>
-              <div class="text-sm sm:text-body-2 text-gray-600">{{ event?.seats ?? "n/a" }} Plätze</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Verfügbare Plätze</div>
+              <div class="text-base font-bold text-gray-900 mt-1">{{ event?.seats ?? "n/a" }}</div>
             </div>
           </div>
 
-          <div class="info-item flex items-start gap-2 sm:gap-3">
-           <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-clock-outline</v-icon>
+          <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-green-50 hover:bg-green-100 transition-colors border border-green-100">
+           <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-door-open</v-icon>
             <div class="min-w-0">
-              <div class="text-base sm:text-h6 font-weight-semibold">Doors Open</div>
-              <div class="text-sm sm:text-body-2 text-gray-600">{{ formattedTimeDoorOpen }}</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Einlass</div>
+              <div class="text-base font-bold text-gray-900 mt-1">{{ formattedTimeDoorOpen }}</div>
             </div>
           </div>
 
-          <div class="info-item flex items-start gap-2 sm:gap-3">
-           
-           
-              <v-icon size="24" sm:size="30" style="color: #1B263B;">mdi-lock</v-icon>
+          <div class="info-item flex items-start gap-3 p-4 rounded-xl bg-red-50 hover:bg-red-100 transition-colors border border-red-100">
+           <v-icon size="28" style="color: #1B263B; flex-shrink: 0;">mdi-door-closed</v-icon>
             <div class="min-w-0">
-              <div class="text-base sm:text-h6 font-weight-semibold">Doors Close</div>
-              <div class="text-sm sm:text-body-2 text-gray-600">{{ formattedTimeDoorClose }}</div>
+              <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Ende</div>
+              <div class="text-base font-bold text-gray-900 mt-1">{{ formattedTimeDoorClose }}</div>
             </div>
           </div>
 
@@ -80,17 +78,15 @@
         <Description :event="event" :previewLimit="100" />
       </v-card>
 
-      <v-row align="center" justify="space-between">
-        <v-col cols="6">
-          <div class="text-h6 font-weight-bold">
-            Preis:
-            <span class="text-h5">{{ event?.maxPrice?.value }} €</span>
-          </div>
+      <v-row align="center" justify="space-between" class="pt-6 border-t border-gray-200">
+        <v-col cols="12" sm="6">
+          <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Preis ab</div>
+          <div class="text-3xl font-bold text-gray-900">{{ event?.minPrice?.value ?? event?.maxPrice?.value }} <span class="text-lg">€</span></div>
         </v-col>
 
-        <v-col cols="6" class="text-right">
-          <button @click="addToCart" class="btn btn--primary px-6 py-3 text-base font-semibold">
-            In den Warenkorb
+        <v-col cols="12" sm="6" class="text-right">
+          <button @click="addToCart" class="btn btn--primary px-8 py-4 text-base font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            In den Warenkorb 🛒
           </button>
         </v-col>
       </v-row>
