@@ -29,16 +29,28 @@ export default async function handler(req, res) {
     if (otherParams.toString()) targetUrl = `${targetUrl}?${otherParams.toString()}`
 
     const start = Date.now()
-    const response = await fetch(targetUrl)
+    const response = await fetch(targetUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    })
     console.log('Fetch Dauer (ms):', Date.now() - start)   // <-- Log direkt nach fetch
 
     // Prüfen, ob die API OK ist
     if (!response.ok) {
-      return res.status(response.status).json({ error: `Eventim API error ${response.status}` })
+      const errText = await response.text().catch(() => '')
+      console.log(`API returned status ${response.status} for URL: ${targetUrl}`)
+      console.log('Upstream response body:', errText)
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Cache-Control', 'no-store')
+      return res.status(response.status).json({ error: `Eventim API error ${response.status}`, details: errText })
     }
 
     const data = await response.json()
     res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Cache-Control', 'no-store')
     return res.status(200).json(data)
   } catch (error) {
     res.setHeader('Access-Control-Allow-Origin', '*')
