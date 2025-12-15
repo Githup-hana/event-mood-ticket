@@ -1,9 +1,12 @@
 <template>
   <div class=" flex justify-center align-items-center h-screen  ">
   <v-card class="pa-4  my-6   " >
-    <v-card-title class="text-h6 font-semibold h-10">
-      Wähle deine Zahlungsmethode
-    </v-card-title>
+    <div class="d-flex justify-space-between align-center">
+      <v-card-title class="text-h6 font-semibold h-10">
+        Wähle deine Zahlungsmethode
+      </v-card-title>
+      <v-btn icon="mdi-close" variant="text" @click="closePaymentCard" size="small"></v-btn>
+    </div>
 
     <v-card-text>
       <v-radio-group v-model="payment"  >
@@ -65,9 +68,11 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import PaypalModal from './PaypalModal.vue'
 import CardModal from './CardModal.vue'
 
+const router = useRouter()
 const payment = ref('card')
 const showPaypalDialog = ref(false)
 const showCardDialog = ref(false)
@@ -78,6 +83,11 @@ const confirmPayment = () => {
     return
   }
   alert(`Gewählte Zahlungsmethode: ${payment.value}`)
+}
+
+const closePaymentCard = () => {
+
+  router.push('/events')
 }
 const cards = {
   'visa': '/logos/visa.svg',

@@ -6,6 +6,7 @@ import type { CartEntry } from '@/types/event'
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<Record<string, CartEntry>>({})
+  const showCartPopup = ref(false) 
 
   const addOrUpdate = (event: Event, qtyMin: number, qtyMax: number) => {
     items.value[event.id] = { event, qtyMin: qtyMin ?? 0, qtyMax: qtyMax ?? 0 }
@@ -33,7 +34,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const getItem = (eventId: string): CartEntry => items.value[eventId] ?? { event: null, qtyMin: 0, qtyMax: 0 }
 
-  return { items, entries, getItem, addOrUpdate, remove, totalCount, totalPrice }
+  return { items, entries, getItem, addOrUpdate, remove, totalCount, totalPrice, showCartPopup }
 }, {
   persist: true 
 })
