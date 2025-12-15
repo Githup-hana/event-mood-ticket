@@ -2,8 +2,7 @@
 const PROD_API = '/api/proxy'
 
 function getApiBase(): string {
-  // Development: use Vite proxy (configured in vite.config.ts)
-  // Production: use Netlify serverless function
+
   return import.meta.env.DEV ? '/api/event' : PROD_API
 }
 
