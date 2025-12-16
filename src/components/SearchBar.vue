@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useSearchStore } from '@/stores/search'
 
 const { t } = useI18n()
+const router = useRouter()
 const searchQuery = ref('')
 const searchStore = useSearchStore()
 
@@ -11,6 +13,7 @@ const handleSearch = (event: Event) => {
   event.preventDefault()
   const location = searchQuery.value.trim()
   searchStore.setLocationQuery(location)
+  router.push('/events')
   emit('search-submitted')
 }
 
