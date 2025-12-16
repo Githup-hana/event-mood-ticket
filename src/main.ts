@@ -45,6 +45,5 @@ app.component('Logo', Logo)
 
 app.mount('#app')
 
-// Initialize theme after app is mounted
 const themeStore = useThemeStore()
 themeStore.loadTheme()

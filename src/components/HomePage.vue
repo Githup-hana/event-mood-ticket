@@ -47,13 +47,13 @@ const goEvents = () => router.push({ name: 'events' })
           Tickets
       </p>
 
-     
-      <p class="text-xl font-normal text-white/90">
+     <div > <p class="text-xl font-normal text-white/90">
           {{ t('home.title') }}
       </p>
       <p class="text-xl font-normal text-white/90">
           {{ t('home.subtitle') }}
-      </p>
+      </p></div>
+     
 
      
       <button
