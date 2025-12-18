@@ -22,11 +22,11 @@
    
       <v-row class="mb-10">
         <v-col cols="12">
-       <div class="w-full rounded-lg overflow-hidden max-h-[400px] mx-auto">
+       <div class="w-full h-[420px] rounded-lg overflow-hidden mx-auto">
   <img
     :src="imgSrcComputed"
     :alt="event?.title"
-    class="w-full h-auto object-contain"
+    class="block w-full h-full object-cover"
   />
 </div>
         </v-col>

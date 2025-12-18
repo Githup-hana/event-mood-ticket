@@ -20,7 +20,7 @@ import { useI18n } from 'vue-i18n'
 import type { Event } from '@/types/event'
 
 const { t } = useI18n()
-const props = defineProps<{ event: Event | null; previewLimit?: number }>()
+const props = defineProps<{ event: Event | null | undefined; previewLimit?: number }>()
 
 const PREVIEW_LIMIT = props.previewLimit ?? 100
 

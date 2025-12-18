@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, defineAsyncComponent } from 'vue'
+import { computed, onMounted, watch, defineAsyncComponent } from 'vue'
 import useEvent from '@/composables/useEvent'
 
 const props = defineProps<{ id: string }>()
@@ -15,6 +15,10 @@ onMounted(() => {
 	if (props.id) loadEvent(props.id)
 })
 
+
+watch(() => props.id, (newId) => {
+	if (newId) loadEvent(newId)
+})
 
 const AsyncEventContent = defineAsyncComponent(() => import('@/components/event/EventContent.vue'))
 

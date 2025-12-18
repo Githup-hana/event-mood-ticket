@@ -43,7 +43,7 @@ const goToPayment = () => {
       v-model="dialog"
       location="end"
       temporary
-      scrim
+      :scrim="false"
       width="460"
     
       class="flex flex-col w-full sm:w-[860px] h-screen !overflow-hidden"

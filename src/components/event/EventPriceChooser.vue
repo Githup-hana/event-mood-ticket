@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useI18n } from 'vue-i18n'
 import type { Event } from "@/types/event";
 import { useCartStore } from "@/stores/cart";
+import { RouterLink } from 'vue-router';
 
 const { t } = useI18n()
 const props = defineProps<{ event: Event }>();
@@ -29,13 +30,25 @@ const totalPrice = computed(() => {
   return (item.value.qtyMin ?? 0) * min + (item.value.qtyMax ?? 0) * max;
 });
 
-const remove = () => {
+const goToDetail = () => {
+  cart.showCartPopup = false;
+};
+
+const remove = (e: MouseEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
   if (!props.event?.id) return;
   cart.remove(props.event.id);
 };
 </script>
 
 <template>
+   <RouterLink 
+    :to="{ name: 'eventDetail', params: { id: props.event.id } }" 
+    class="block no-underline"
+    :aria-label="`Details öffnen für ${props.event.title}`"
+    @click="goToDetail"
+  >
   <div
     class="price-box w-full flex flex-col sm:flex-row border p-2 border-slate-800 rounded-lg shadow-md overflow-y-auto "
   >
@@ -57,11 +70,11 @@ const remove = () => {
               {{ props.event.maxPrice?.value ?? "—" }} €
             </div>
             </v-col> <v-col cols="6"> <div class="flex items-center ">
-            <button :aria-label="`${t('event.decrease')} ${t('event.standardPrice')}`" @click="decMax" class="maxmin-button">
+            <button :aria-label="`${t('event.decrease')} ${t('event.standardPrice')}`" @click.prevent.stop="decMax" class="maxmin-button">
               −
             </button>
             <div class="w-10 text-center text-sm font-medium text-indigo-50">{{ item.qtyMax }}</div>
-            <button :aria-label="`${t('event.increase')} ${t('event.standardPrice')}`" @click="incMax" class="maxmin-button">
+            <button :aria-label="`${t('event.increase')} ${t('event.standardPrice')}`" @click.prevent.stop="incMax" class="maxmin-button">
               +
             </button>
           </div></v-col></v-row>
@@ -75,11 +88,11 @@ const remove = () => {
               {{ props.event.minPrice?.value ?? "—" }} €
             </div></v-col>
             <v-col class="p-8"  cols="6"><div class="flex items-center ">
-            <button :aria-label="`${t('event.decrease')} ${t('event.reduced')}`" @click="decMin" class="maxmin-button">
+            <button :aria-label="`${t('event.decrease')} ${t('event.reduced')}`" @click.prevent.stop="decMin" class="maxmin-button">
               −
             </button>
             <div class="w-10 text-center text-sm font-medium text-indigo-50">{{ item.qtyMin }}</div>
-            <button :aria-label="`${t('event.increase')} ${t('event.reduced')}`" @click="incMin" class="maxmin-button">+</button>
+            <button :aria-label="`${t('event.increase')} ${t('event.reduced')}`" @click.prevent.stop="incMin" class="maxmin-button">+</button>
           </div></v-col>
         </v-row>
          
@@ -102,6 +115,7 @@ const remove = () => {
       </button>
     </div>
   </div>
+  </RouterLink>
 </template>
 <style scoped>
 .ticket img {

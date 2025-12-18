@@ -29,7 +29,7 @@ export interface Event {
 }
 
 export interface EventContentProps {
-  event: Event | null
+  event: Event | null | undefined
   imgSrc?: string
   formattedDate?: string
   formattedTime?: string
